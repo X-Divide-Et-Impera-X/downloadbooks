@@ -3,7 +3,7 @@
 Download a ton of books online with just one command
 
 
-##Usage
+## Usage
 `
 python3 scrapebooks.py [Query]
 python3 scrapebooks.py [Query] [args to add after the first run]
