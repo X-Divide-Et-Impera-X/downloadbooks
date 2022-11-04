@@ -5,12 +5,10 @@ Download a ton of books online with just one command
 
 ## Usage
 ```
-python3 scrapebooks.py [Query]
-python3 scrapebooks.py [Query] [args to add after the first run]
+python3 scrapebooks.py [Query] [-n number-of-books-you-want-to-download]
 ```
 
 ## Example
 ```
-python3 scrapebooks.py Introduction To Linear Algebra
-python3 scrapebooks.py Introduction To Linear Algebra -args trbs 4523423498
+python3 scrapebooks.py Introduction To Linear Algebra -n 10
 ```
