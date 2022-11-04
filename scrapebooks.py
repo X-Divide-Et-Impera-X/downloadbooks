@@ -4,12 +4,10 @@ import sys
 import re
 import requests
 import argparse
-from tqdm import tqdm
 from threading import Thread
 
 parser = argparse.ArgumentParser()
 parser.add_argument("query",nargs='+')
-parser.add_argument("-args",nargs=2)
 parser.add_argument("-n",type=int,default=10)
 args = parser.parse_args()
 
@@ -33,14 +31,13 @@ params = {
 	"filetype"		: "pdf",
 	"n"			: args.n, # number of results
 }
-if args.args:
-	params[args.args[0]] = args.args[1]
 
-with requests.get("http://gigablast.com/search",params=params,timeout=5) as r:
-	if re.match(regex,r.text):
-		print("Sub this into your next run","-args",*re.sub(regex,r"\1\2",r.text).split('='))
-		sys.exit()
-	else:
+with requests.get("http://gigablast.com/search",params=params) as r:
+	# Gigablast has this weird thing where it adds a ramdom value to the link before it works
+	key, value = re.sub(regex,r"\1\2",r.text).split('=')
+	params[key] = value
+
+with requests.get("http://gigablast.com/search",params=params) as r:
 		response_dict = r.json()
 
 n = 0
